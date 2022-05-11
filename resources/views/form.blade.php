@@ -18,14 +18,17 @@
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Task name</label>
         <input type="text" class="form-control"
-               value="{{ isset($task) ? $task->name : null }}"
+               value="{{ old('name', isset($task) ? $task->name : null) }}"
                id="exampleFormControlInput1" placeholder="Please enter task" name="name">
+        @error('name')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Please enter description" name="body">{{ isset($task) ? $task->body : null }}</textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Please enter description" name="body">{{ old('body', isset($task) ? $task->body : null) }}</textarea>
     </div>
-    <button type="submit" class="btn btn-success">Update</button>
+    <button type="submit" class="btn btn-success">{{ isset($task) ? 'Update' : 'Create' }}</button>
 </form>
 
 
