@@ -12,11 +12,11 @@
         </div>
         <div class="card-body">
             <p class="card-text">{{ $task->body }}</p>
-            <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
-            <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
+            <a href="{{ route('tasks.edit', $task) }}" class="btn btn-outline-secondary btn-sm">Edit</a>
+            <a class="btn btn-outline-danger btn-sm">Delete</a>
         </div>
         <div class="card-footer text-muted">
-            2 дня спустя
+            {{ $task->updated_at }}
         </div>
     </div>
     @endforeach

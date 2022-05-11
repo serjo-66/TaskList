@@ -1,20 +1,34 @@
 @extends('layout')
 
-@section('title', 'Task')
+@section('title', isset($task) ? 'Update ' .$task->name : 'Create task')
 
 @section('content')
-
-<form method="post" action="{{ route('tasks.store') }}">////////Кнопка не работает 26:44
+    <a href="{{ route('tasks.index') }} " class="btn btn-secondary mt-1 mb-3 btn-sm">Back to home</a>
+<form method="post"
+      @if(isset($task))
+      action="{{ route('tasks.update', $task) }}"
+      @else
+      action="{{ route('tasks.store') }}"
+      @endif
+        >
+    @csrf
+    @isset($task)
+        @method('PUT')
+    @endisset
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Task name</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Please enter task" name="name">
+        <input type="text" class="form-control"
+               value="{{ isset($task) ? $task->name : null }}"
+               id="exampleFormControlInput1" placeholder="Please enter task" name="name">
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Please enter description" name="body"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Please enter description" name="body">{{ isset($task) ? $task->body : null }}</textarea>
     </div>
-    <a class="btn btn-success">Create</a>
+    <button type="submit" class="btn btn-success">Create</button>
 </form>
+
+
 
 
 
