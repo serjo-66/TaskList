@@ -8,7 +8,7 @@
     @foreach($tasks as $task)
     <div class="card text-center mt-3">
         <div class="card-header">
-            <h5 class="card-title">{{ $task->name }}</h5>
+            <h5 class="card-title"><a href="{{ route('tasks.show', $task) }}" class="text-decoration-none text-reset">{{ $task->name }}</a></h5>
         </div>
         <div class="card-body">
             <p class="card-text">{{ $task->body }}</p>
@@ -16,7 +16,7 @@
             <a class="btn btn-outline-danger btn-sm">Delete</a>
         </div>
         <div class="card-footer text-muted">
-            {{ $task->updated_at }}
+            {{ $task->updated_at->format('d/m/y H:i:s') }}
         </div>
     </div>
     @endforeach
