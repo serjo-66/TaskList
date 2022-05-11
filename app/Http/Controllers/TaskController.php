@@ -10,7 +10,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::get();
+        $tasks = Task::get()->reverse();
         return view('index', compact('tasks'));
     }
 
@@ -22,7 +22,7 @@ class TaskController extends Controller
     public function store(TaskRequest $request)
     {
         Task::create($request->only(['name', 'body']));
-        return redirect()->route('tasks.index');
+        return redirect()->route('tasks.index')->withSuccess('Created task ' .$request->name);
     }
 
     public function show(Task $task)
@@ -38,13 +38,13 @@ class TaskController extends Controller
     public function update(TaskRequest $request, Task $task)
     {
         $task->update($request->only(['name', 'body']));
-        return redirect()->route('tasks.index');
+        return redirect()->route('tasks.index')->withSuccess('Updated task ' .$task->name);
     }
 
     public function destroy(Task $task)
     {
         $task->delete();
-        return redirect()->route('tasks.index');
+        return redirect()->route('tasks.index')->withDanger('Delete task ' .$task->name);
     }
 
 }
