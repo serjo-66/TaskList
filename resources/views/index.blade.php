@@ -12,8 +12,12 @@
         </div>
         <div class="card-body">
             <p class="card-text">{{ $task->body }}</p>
-            <a href="{{ route('tasks.edit', $task) }}" class="btn btn-outline-secondary btn-sm">Edit</a>
-            <a class="btn btn-outline-danger btn-sm">Delete</a>
+                <form method="post" action="{{ route('tasks.destroy', $task) }}">
+                    <a href="{{ route('tasks.edit', $task) }}" class="btn btn-outline-secondary btn-sm">Edit</a>
+                    @csrf
+                    @method('DELETE')
+                    <button value="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                </form>
         </div>
         <div class="card-footer text-muted">
             {{ $task->updated_at->format('d/m/y H:i:s') }}

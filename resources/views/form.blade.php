@@ -25,7 +25,7 @@
         <label for="exampleFormControlTextarea1" class="form-label">Description</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Please enter description" name="body">{{ isset($task) ? $task->body : null }}</textarea>
     </div>
-    <button type="submit" class="btn btn-success">Create</button>
+    <button type="submit" class="btn btn-success">Update</button>
 </form>
 
 
