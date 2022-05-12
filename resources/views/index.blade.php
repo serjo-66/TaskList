@@ -1,9 +1,9 @@
 @extends('layout')
 
-@section('title', 'Task')
+@section('title', 'Task list')
 
 @section('content')
-    <a href="{{ route('tasks.create') }}" class="btn btn-primary btn-lg">Create task</a>
+    <a href="{{ route('tasks.create') }}" class="btn btn-primary">Create new task</a>
 
     @foreach($tasks as $task)
     <div class="card text-center mt-3">
