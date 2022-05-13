@@ -18,8 +18,15 @@ class CreateTasksTable extends Migration
             $table->string('name');
             $table->text('body')->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
+
     }
+
+
 
     /**
      * Reverse the migrations.

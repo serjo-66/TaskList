@@ -4,14 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::get()->reverse();
+        $tasks = Task::scopeUser()->get()->reverse();
         return view('index', compact('tasks'));
+
+        /*$query = Task::query();
+        $user = auth()->user();
+
+        if ($user) {
+            $query->where('user_id', $user->id);
+        }
+        $tasks = $query->get()->reverse();
+
+        return view('index', compact('tasks'));*/
     }
 
     public function create()
