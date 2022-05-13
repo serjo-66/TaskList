@@ -16,10 +16,4 @@ class Task extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
-    public function scopeUser(Builder $query)
-    {
-        $user = auth()->user();
-        return $user ? $query->where('user_id', $user->id) : $query;
-    }
 }

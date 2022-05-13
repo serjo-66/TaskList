@@ -16,6 +16,8 @@
         @method('PUT')
     @endisset
     <div class="mb-3">
+
+        <input hidden value="{{ $user->id }}" name="user_id">
         <label for="exampleFormControlInput1" class="form-label">Task name</label>
         <input type="text" class="form-control"
                value="{{ old('name', isset($task) ? $task->name : null) }}"

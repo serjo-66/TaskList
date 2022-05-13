@@ -11,10 +11,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::scopeUser()->get()->reverse();
-        return view('index', compact('tasks'));
-
-        /*$query = Task::query();
+        $query = Task::query();
         $user = auth()->user();
 
         if ($user) {
@@ -22,17 +19,20 @@ class TaskController extends Controller
         }
         $tasks = $query->get()->reverse();
 
-        return view('index', compact('tasks'));*/
+        return view('index', compact('tasks'));
     }
 
     public function create()
     {
-        return view('form');
+        $user = auth()->user();
+
+        return view('form', compact('user'));
     }
 
     public function store(TaskRequest $request)
     {
-        Task::create($request->only(['name', 'body']));
+
+        Task::create($request->only(['name', 'body', 'user_id']));
         return redirect()->route('tasks.index')->withSuccess('Created task ' .$request->name);
     }
 
@@ -43,12 +43,13 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        return view('form', compact('task'));
+        $user = auth()->user();
+        return view('form', compact('task', 'user'));
     }
 
     public function update(TaskRequest $request, Task $task)
     {
-        $task->update($request->only(['name', 'body']));
+        $task->update($request->only(['name', 'body', 'user_id']));
         return redirect()->route('tasks.index')->withSuccess('Updated task ' .$task->name);
     }
 

@@ -19,7 +19,7 @@ class CreateTasksTable extends Migration
             $table->text('body')->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
         });

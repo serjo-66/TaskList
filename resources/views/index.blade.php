@@ -3,7 +3,7 @@
 @section('title', 'Task list')
 
 @section('content')
-    <a href="{{ route('tasks.create') }}" class="btn btn-primary">Create new task</a>
+    <a href="{{ route('tasks.create', 'info') }}" class="btn btn-primary">Create new task</a>
     @foreach($tasks as $task)
     <div class="card text-center mt-3">
         <div class="card-header">
