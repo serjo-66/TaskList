@@ -11,15 +11,10 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $query = Task::query();
-        $user = auth()->user();
-
-        if ($user) {
-            $query->where('user_id', $user->id);
-        }
-        $tasks = $query->get()->reverse();
+        $tasks = Task::byUser()->get()->reverse();
 
         return view('index', compact('tasks'));
+
     }
 
     public function create()
@@ -31,9 +26,15 @@ class TaskController extends Controller
 
     public function store(TaskRequest $request)
     {
-
-        Task::create($request->only(['name', 'body', 'user_id']));
+        Task::create([
+            'name' => $request->get('name'),
+            'body' => $request->get('body'),
+            'user_id' => $request->user() ? $request->user()->id : null,
+        ]);
         return redirect()->route('tasks.index')->withSuccess('Created task ' .$request->name);
+
+        /*Task::create($request->only(['name', 'body', 'user_id']));
+        return redirect()->route('tasks.index')->withSuccess('Created task ' .$request->name);*/
     }
 
     public function show(Task $task)
@@ -43,8 +44,7 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $user = auth()->user();
-        return view('form', compact('task', 'user'));
+        return view('form', compact('task'));
     }
 
     public function update(TaskRequest $request, Task $task)
