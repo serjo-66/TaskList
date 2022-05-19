@@ -14,9 +14,3 @@ MySQL-8.0
 
 Bootstrap-4
 
-PHP-7.3+
-
-MySQL-8.0
-
-Bootstrap-4
-

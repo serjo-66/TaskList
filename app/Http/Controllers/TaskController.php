@@ -11,8 +11,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::byUser()->get()->reverse();
-
+        $tasks = Task::ByUser()->get()->reverse();
         return view('index', compact('tasks'));
 
     }
@@ -31,7 +30,7 @@ class TaskController extends Controller
             'body' => $request->get('body'),
             'user_id' => $request->user() ? $request->user()->id : null,
         ]);
-        return redirect()->route('tasks.index')->withSuccess('Created task ' .$request->name);
+        return redirect()->route('tasks.index')->withSuccess('Created task ' . $request->name);
 
         /*Task::create($request->only(['name', 'body', 'user_id']));
         return redirect()->route('tasks.index')->withSuccess('Created task ' .$request->name);*/
@@ -50,13 +49,13 @@ class TaskController extends Controller
     public function update(TaskRequest $request, Task $task)
     {
         $task->update($request->only(['name', 'body', 'user_id']));
-        return redirect()->route('tasks.index')->withSuccess('Updated task ' .$task->name);
+        return redirect()->route('tasks.index')->withSuccess('Updated task ' . $task->name);
     }
 
     public function destroy(Task $task)
     {
         $task->delete();
-        return redirect()->route('tasks.index')->withDanger('Delete task ' .$task->name);
+        return redirect()->route('tasks.index')->withDanger('Delete task ' . $task->name);
     }
 
 }
