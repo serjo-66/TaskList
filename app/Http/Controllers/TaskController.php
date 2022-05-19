@@ -31,9 +31,6 @@ class TaskController extends Controller
             'user_id' => $request->user() ? $request->user()->id : null,
         ]);
         return redirect()->route('tasks.index')->withSuccess('Created task ' . $request->name);
-
-        /*Task::create($request->only(['name', 'body', 'user_id']));
-        return redirect()->route('tasks.index')->withSuccess('Created task ' .$request->name);*/
     }
 
     public function show(Task $task)
